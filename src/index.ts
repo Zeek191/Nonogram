@@ -1,4 +1,5 @@
 import Board from "./board";
+import Game from "./game";
 import { calculateCol, calculateRow } from "./numbers";
 
 const DATA = [
@@ -9,5 +10,8 @@ const DATA = [
   [false, false, false, false, false]
 ];
 
-const board = new Board(calculateCol(DATA), calculateRow(DATA));
+const game = new Game(DATA);
+const board = new Board(calculateCol(DATA), calculateRow(DATA), game);
+
 board.createBoard();
+game.init();

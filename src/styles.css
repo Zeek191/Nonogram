@@ -2,11 +2,16 @@ body {
   font-family: sans-serif;
 }
 
+.wrapper {
+  width: 50vw;
+  height: 50vw;
+}
 .board {
   border: 1px solid black;
   display: grid;
   min-width: 100px;
   min-height: 100px;
+  width: 100%;
 }
 
 .cols,

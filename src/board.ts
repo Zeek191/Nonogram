@@ -1,3 +1,5 @@
+import Game from "./game";
+
 const BOARD = document.getElementById("board");
 const ROWS = document.getElementById("rows");
 const COLS = document.getElementById("cols");
@@ -5,18 +7,24 @@ const COLS = document.getElementById("cols");
 export default class Board {
   cols: Array<number[]>;
   rows: Array<number[]>;
+  game: Game;
 
-  constructor(cols: Array<number[]>, rows: Array<number[]>) {
+  constructor(
+    cols: Array<number[]>,
+    rows: Array<number[]>,
+    gameServiceReference: Game
+  ) {
     this.cols = cols;
     this.rows = rows;
+    this.game = gameServiceReference;
   }
 
   private adjustBoard() {
     if (BOARD && COLS && ROWS) {
       BOARD.style.gridTemplateColumns = `repeat(${this.cols.length}, 1fr)`;
       BOARD.style.gridTemplateRows = `repeat(${this.rows.length}, 1fr)`;
-      COLS.style.gridTemplateColumns = `repeat(${this.rows.length - 1}, 1fr)`;
-      ROWS.style.gridTemplateRows = `repeat(${this.rows.length - 1}, 1fr)`;
+      COLS.style.gridTemplateColumns = `repeat(${this.rows.length + 1}, 1fr)`;
+      ROWS.style.gridTemplateRows = `repeat(${this.rows.length}, 1fr)`;
     }
   }
 
@@ -45,7 +53,7 @@ export default class Board {
           : cell;
 
       informationContainer.innerHTML = `${
-        type === "col" ? transformedCell : cell
+        type === "col" ? transformedCell : cell || 0
       }`;
 
       parent?.appendChild(informationContainer);
@@ -61,8 +69,15 @@ export default class Board {
     }
   }
 
+  private prepareBoard() {
+    if (!BOARD) return null;
+    BOARD.style.gridTemplateColumns = `repeat(${this.cols.length}, 1fr)`;
+    BOARD.style.gridTemplateRows = `repeat(${this.rows.length}, 1fr)`;
+  }
+
   public createBoard() {
     this.adjustBoard();
     this.fillBoardWithNumbers();
+    this.prepareBoard();
   }
 }
