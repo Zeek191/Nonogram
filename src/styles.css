@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+}
+
+.board {
+  border: 1px solid black;
+  display: grid;
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.cols,
+.rows {
+  display: grid;
+}
+
+.cols {
+  grid-template-rows: 1fr;
+  border: 1px solid red;
+}
+
+.rows {
+  border: 1px solid green;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.innerWrapper {
+  display: flex;
+}
