@@ -23,7 +23,6 @@ export default class Board {
     if (BOARD && COLS && ROWS) {
       BOARD.style.gridTemplateColumns = `repeat(${this.cols.length}, 1fr)`;
       BOARD.style.gridTemplateRows = `repeat(${this.rows.length}, 1fr)`;
-      COLS.style.gridTemplateColumns = `repeat(${this.rows.length + 1}, 1fr)`;
       ROWS.style.gridTemplateRows = `repeat(${this.rows.length}, 1fr)`;
     }
   }

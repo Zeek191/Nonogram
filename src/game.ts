@@ -14,10 +14,11 @@ export default class Game {
     this.possibleMoves = 0;
   }
 
-  private allowBoardReste() {
-    const buttons = document.querySelectorAll("button");
-    buttons.forEach((button) => {
-      button.disabled = true;
+  private endGame() {
+    const BUTTONS = document.querySelectorAll("button");
+
+    BUTTONS.forEach((button) => {
+      if (button.id !== "reset") button.disabled = true;
     });
   }
 
@@ -26,10 +27,12 @@ export default class Game {
 
     if (this.lives === 0) {
       RESULT.innerHTML = `Result: You loosed`;
+      return this.endGame();
     }
 
     if (this.possibleMoves === 0) {
       RESULT.innerHTML = `Result: You won!`;
+      return this.endGame();
     }
   }
 
@@ -79,6 +82,17 @@ export default class Game {
   public init() {
     this.possibleMoves = this.calculatePossibleCellsCount();
     const buttons = this.renderButtons(this.data);
+    const resetButton = document.querySelector("#reset");
+
+    resetButton?.addEventListener("click", () => {
+      this.lives = 3;
+      this.possibleMoves = this.calculatePossibleCellsCount();
+      const boardButtons = BOARD?.querySelectorAll("button");
+      boardButtons?.forEach((button) => {
+        button.style.background = "buttonface";
+        button.disabled = false;
+      });
+    });
 
     buttons.forEach((buttonsCollection) => {
       buttonsCollection.forEach((button) => {
